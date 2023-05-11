@@ -29,4 +29,10 @@ public class GameService {
         return gameRepository.findById(id).stream().map(GameDTO::new).findFirst().orElseThrow(() -> new NaoEncontradoException("Id não encontrado"));
     }
 
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId) {
+        return gameRepository.searchByList(listId).stream().map(GameMinDTO::new).toList();
+    }
+
+
 }
